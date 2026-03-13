@@ -1,0 +1,84 @@
+setcpm(40);
+
+let drums = sound(`
+  [bd, rim] sd bd sd
+`).bank("RolandTR909");
+
+
+// one extra 8th long
+const start_4ths = 
+  n("0 0 0@0.5 [2 ~]  -2").scale("F#:minor").transpose(-12);
+const start_8ths = 
+  n("0 0@0.5 0@0.5 0@0.5 [2 ~]  -2").scale("F#:minor").transpose(-12);
+// no first 8th note
+const trans78 = 
+  n("-2@0.5 [-5!2] [-2!2] [-5!2]").scale("F#:minor").transpose(-12);
+
+
+let riff_Fs_veryfirst = stepcat([9/8, start_4ths], [7/8, trans78])
+let riff_Fs_main = stepcat([9/8, start_8ths], [7/8, trans78])
+
+let riff_E_narrow =  
+  // |                          1/8 | 1/8 
+  n("[2 2@0.5 2@0.5  2@0.5 [1 ~]    0   0 -1@0.5  0@0.5  0@0.5  0@0.5 -1@0.5 ]")
+  // n("<[2 2@0.5!3 [1 ~] 0 0 -1@0.5  0@0.5  0@0.5  0@0.5 -1@0.5 ]>/2")
+  .scale("E:minor").transpose(-12);
+let riff_G_high =  
+  // |              1/8   | 1/8 
+  n("[0 0 0@0.5 [1 ~] 2   2 1 1@0.5 [0 ~]]")
+  .scale("G:minor").transpose(-12);
+let riff_E_wide =  
+  // |                          1/8 | 1/8 
+  n("[2 2@0.5 2@0.5  2@0.5 [1 ~]    0   0@0.5 0@0.5 -1@0.5  0@0.5  1@0.5  0@0.5 -1@0.5 ]")
+  .scale("E:minor").transpose(-12);
+
+
+let riff_main_high = cat(riff_Fs_main, riff_G_high).fast(2)
+
+let intro = cat(cat(riff_Fs_veryfirst, riff_E_narrow).fast(2),
+                riff_main_high, 
+                cat(riff_Fs_main, riff_E_wide).fast(2), 
+                cat(riff_Fs_main, riff_G_high).fast(2))
+
+let verse_E_end =  
+  // |                          1/8 | 1/8 
+  n("[2 2@0.5 2@0.5  2@0.5 [1 ~]    0     0@0.5 0@0.5 0@0.5 0@0.5 0@0.5 0 ]")
+  .scale("E:minor").transpose(-12);
+
+// actually slightly different 2nd part
+let verse_low = cat(riff_Fs_main, riff_E_narrow).fast(2)
+// the 4th note before 7/8 ending is also an octave higher
+let verse_high = cat(stepcat([9/8, start_8ths], [7/8, trans78.transpose(12)]), 
+                     riff_E_narrow).fast(2) // same diff ?
+let verse_end = cat(stepcat([9/8, start_8ths], [7/8, trans78.transpose(12)]), 
+                     verse_E_end).fast(2)
+
+let verse = cat(verse_low, verse_high, verse_low, verse_high, 
+                verse_low, verse_high, verse_low, verse_end )
+
+// last 4th is a slide up/down
+let chorus_G = n("0@7 0").scale("G:minor").transpose(-24);
+let chorus_E = n("0@7 0").scale("E:minor").transpose(-12);
+let chorus_end = n("0@9 0@0.5!7").scale("E:minor").transpose(-12);
+
+let chorus1 = cat(chorus_G, chorus_E, chorus_G, chorus_end)
+
+
+let verse21 = verse_low
+let verse22 = riff_main_high // or verse_high?
+let verse23 = cat(riff_Fs_main, riff_E_wide).fast(2)
+let verse24 = riff_main_high
+
+let verse2 = cat(verse21, verse22, verse23, verse24, 
+                 verse_low, verse_high, verse_low, verse_end, )
+
+let chorus2 = cat(chorus_G, chorus_E, chorus_G, chorus_E,
+                  chorus_G, chorus_E, chorus_G, chorus_end, ) 
+
+let bass =
+  //cat(verse11, verse12).slow(4)
+  intro.slow(4)
+  .sound("gm_electric_bass_pick")
+
+$: drums;
+$: bass;
