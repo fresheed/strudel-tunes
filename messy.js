@@ -20,6 +20,22 @@ let riff_E2_slower_alt_high = n("0@2 ~ 4 ~ [7 8@2] ~ [10 11@2]").scale("E:major"
 let riff_E2_faster = n("0 0 1 1 [4 5@2] 4 7 5").scale("E:major").transpose(-24);
 let riff_E2_even_slower = n("0@2 ~ 4 ~ [7 8@2] ~ 4").scale("E:major").transpose(-24);
 
+let chorus_Dm4 = n("0@2 ~ 0 ~ 0 ~ 7   0@2 ~ 0 ~ 0 ~ 7").scale("D:minor").transpose(-24);
+let chorus_E3 = n("0@2 ~ 0 ~ 7 ~ 0   0@2 ~ 0!3 5 4").scale("E:major").transpose(-24);
+let chorus_Dm3 = n("0@2 ~ 0 ~ 7 ~ 0   0@2 ~ 0 ~ 7 ~ 0").scale("D:minor").transpose(-24);
+let chorus_E4 = n("0@2 ~ 0 ~ 0 ~ 7   0 0 4 0 7 6b 5 4").scale("E:major").transpose(-24);
+
+// TODO: split into two parts and unify with riff
+let chorus_Dm_comb = n("0@2 ~ 0 ~ 0 ~ 7   0@2 ~ 0 ~ 7 ~ 0").scale("D:minor").transpose(-24);
+let chorus_E_low = n("[0@2 ~ 0 ~ 0 ~ 0]!2").scale("E:major").transpose(-24);
+
+
+let chorus1 = cat(
+  // chorus_Dm4, chorus_E3,
+  //chorus_Dm3, chorus_E4,
+  chorus_Dm_comb, chorus_E_low,
+)
+
 let intro = cat(riff_Dm, 
                 seq(riff_E1, riff_E2_slower),
                 riff_Dm, 
@@ -38,7 +54,7 @@ let verse1 = cat(
 )
 
 let bass = 
-  verse1.slow(2).sound("gm_electric_bass_finger")
+  chorus1.slow(2).sound("gm_electric_bass_finger")
 
 $: bass;
 $: drums;
