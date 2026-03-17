@@ -28,23 +28,26 @@ let riff_main_high = cat(riff_Fs_main, riff_G_high).fast(2)
 let intro = cat(cat(riff_Fs_veryfirst, riff_E_narrow).fast(2),
                 riff_main_high, 
                 cat(riff_Fs_main, riff_E_wide).fast(2), 
-                cat(riff_Fs_main, riff_G_high).fast(2))
+                riff_main_high)
 
 let verse_E_end =  
   // |                          1/8 | 1/8 
   n("[2 2@0.5 2@0.5  2@0.5 [1 ~]    0     0@0.5 0@0.5 0@0.5 0@0.5 0@0.5 0 ]")
   .scale("E:minor").transpose(-12);
 
-// actually slightly different 2nd part
 let verse_low = cat(riff_Fs_main, riff_E_narrow).fast(2)
 // the 4th note before 7/8 ending is also an octave higher
 let verse_high = cat(stepcat([9/8, start_8ths], [7/8, trans78.transpose(12)]), 
-                     riff_E_narrow).fast(2) // same diff ?
+                     riff_E_narrow).fast(2)
 let verse_end = cat(stepcat([9/8, start_8ths], [7/8, trans78.transpose(12)]), 
                      verse_E_end).fast(2)
 
+// there are some random variations: 
+// - (4th 4th 8th) or (4th 8th!3) for opening F#
+// - 4th or 8th!2 when switching to E
+// - 4th or 8th!2 for G
 let verse1 = cat(verse_low, verse_high, verse_low, verse_high, 
-                verse_low, verse_high, verse_low, verse_end )
+                 verse_low, verse_high, verse_low, verse_end )
 
 // last 4ths are slides up/down
 let chorus_G = n("0@7 0").scale("G:minor").transpose(-24);
@@ -53,17 +56,19 @@ let chorus_end = n("0@9 0@0.5!7").scale("E:minor").transpose(-12);
 
 let chorus1 = cat(chorus_G, chorus_E, chorus_G, chorus_end)
 
-let verse2 = cat(verse_low,  
-                 riff_main_high, // or verse_high?
-                 cat(riff_Fs_main, riff_E_wide).fast(2),
-                 riff_main_high, 
-                 verse_low, verse_high, verse_low, verse_end, )
+// almost as intro
+let interlude = cat(verse_low,
+                    riff_main_high,
+                    cat(riff_Fs_main, riff_E_wide).fast(2),
+                    riff_main_high)
+
+let verse2 = cat(verse_low, verse_high, verse_low, verse_end, )
 
 let chorus2 = cat(chorus_G, chorus_E, chorus_G, chorus_E,
                   chorus_G, chorus_E, chorus_G, chorus_end, ) 
 
 let bass =
-  verse2.slow(4)
+  verse1.slow(4)
   .sound("gm_electric_bass_pick")
 
 let drums = sound(`
