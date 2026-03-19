@@ -56,7 +56,7 @@ let chorus_end = n("0@9 0@0.5!7").scale("E:minor").transpose(-12);
 
 let chorus1 = cat(chorus_G, chorus_E, chorus_G, chorus_end)
 
-// almost as intro
+// almost as intro, except the beginning
 let interlude = cat(verse_low,
                     riff_main_high,
                     cat(riff_Fs_main, riff_E_wide).fast(2),
@@ -68,7 +68,7 @@ let chorus2 = cat(chorus_G, chorus_E, chorus_G, chorus_E,
                   chorus_G, chorus_E, chorus_G, chorus_end, ) 
 
 let bass =
-  verse1.slow(4)
+  intro.slow(4)
   .sound("gm_electric_bass_pick")
 
 let drums = sound(`
