@@ -6,8 +6,9 @@ let riff_E1 =        n("0@2 ~ 4 ~ 7 ~ 4").scale("E:major").transpose(-24 + shift
 let riff_E2_l2l3 =   n("0@2 ~ [4 5@3] ~ [7 8@3] ~ 4").scale("E:major").transpose(-24 + shift);
 let riff_E2_l3 =     n("0@2 ~ 4 ~ [7 8@2] ~ 4").scale("E:major").transpose(-24 + shift);
 let riff_E2_l3_h =   n("0@2 ~ 4 ~ [7 8@3] ~ 7").scale("E:major").transpose(-24 + shift);
-let riff_E2_l3_l4h = n("0@2 ~ 4 ~ [7 8@2] ~ [10 11@2]").scale("E:major").transpose(-24 + shift);
-let riff_E2_faster = n("0 0 1 1 [4 5@2] 4 7 5").scale("E:major").transpose(-24 + shift);
+let riff_E2_l3_l4 = n("0@2 ~ 4 ~ [7 8@2] ~ [10 11@2]").scale("E:major").transpose(-24 + shift);
+let riff_E2_l234 = n("0@2 ~ 4 ~ [7 8@2] ~ [10 11@2]").scale("E:major").transpose(-24 + shift);
+let riff_E2_end =    n("0 0 1 1 [4 5@2] 4 7 5").scale("E:major").transpose(-24 + shift);
 
 // TODO: split into two parts and unify with riff
 let chorus_Dm4 =   n("0@2 ~ 0 ~ 0 ~ 7   0@2 ~ 0 ~ 0 ~ 7").scale("D:minor").transpose(-24 + shift);
@@ -15,48 +16,51 @@ let chorus_Dm3 =   n("0@2 ~ 0 ~ 7 ~ 0   0@2 ~ 0 ~ 7 ~ 0").scale("D:minor").trans
 let chorus_Dm_43 = n("0@2 ~ 0 ~ 0 ~ 7   0@2 ~ 0 ~ 7 ~ 0").scale("D:minor").transpose(-24 + shift);
 let chorus_Dm_34 = n("0@2 ~ 0 ~ 7 ~ 0   0@2 ~ 0 ~ 0 ~ 7").scale("D:minor").transpose(-24 + shift);
 
-let chorus_E3 =      n("0@2 ~ 0 ~ 7 ~ 0   0@2 ~ 0!3 5 4").scale("E:major").transpose(-24 + shift);
+let chorus_E3_mid =  n("0@2 ~ 0 ~ 7 ~ 0   0@2 ~ 0!3 5 4").scale("E:major").transpose(-24 + shift);
 let chorus_E4_desc = n("0@2 ~ 0 ~ 0 ~ 7   0 0 4 0 7 6b 5 4").scale("E:major").transpose(-24 + shift);
-let chorus_E4_low = n("0@2 ~ 0 ~ 0 ~ 7    0 0 1 1 [4 5@2] 4 7 5").scale("E:major").transpose(-24 + shift);
-let chorus_E4_high = n("0@2 ~ 0 ~ 0 ~ 7   7 7 1 1 [4 5@2] 4 7 5").scale("E:major").transpose(-24 + shift);
+let chorus_E4_end =  n("0@2 ~ 0 ~ 0 ~ 7   0 0 1 1 [4 5@2] 4 7 5").scale("E:major").transpose(-24 + shift);
+let chorus_E4_end_high = n("0@2 ~ 0 ~ 0 ~ 7   7 7 1 1 [4 5@2] 4 7 5").scale("E:major").transpose(-24 + shift);
 let chorus_E4_asc =  n("0@2 ~ 0 ~ 0 ~ 7   0@2 ~ 0 1 4 5 7").scale("E:major").transpose(-24 + shift);
+let chorus_E4_fast =  n("0@2 ~ 0 ~ 0 ~ 7   0@2 ~ [0 1] [3 4] 7 5 4").scale("E:major").transpose(-24 + shift);
 let chorus_E_low =   n("[0@2 ~ 0 ~ 0 ~ 0]!2").scale("E:major").transpose(-24 + shift);
 let mk_E_riff = (e2) => seq(riff_E1, e2)
 
 
 let intro = cat(riff_Dm, mk_E_riff(riff_E2_l2l3), 
-                riff_Dm, mk_E_riff(riff_E2_faster))
+                riff_Dm, mk_E_riff(riff_E2_end))
 
 let chorus1 = cat(
-  // chorus_Dm4, chorus_E3,
-  //chorus_Dm3, chorus_E4,
-  // chorus_Dm_43, chorus_E_low,
-  chorus_Dm_34, chorus_E4_high
+  chorus_Dm4, chorus_E3_mid,
+  chorus_Dm3, chorus_E4_desc,
+  chorus_Dm_43, chorus_E_low,
+  chorus_Dm_34, chorus_E4_end_high
 )
 
 let chorus2 = cat(
   chorus_Dm4, chorus_E4_asc,
-  chorus_Dm4, chorus_E4_high,
+  chorus_Dm4, chorus_E4_end,
+  chorus_Dm4, chorus_E4_fast,
+  chorus_Dm4, chorus_E4_desc, // actually smth different
 )
 
 
 let verse1 = cat(
   riff_Dm, mk_E_riff(riff_E2_l3),
   riff_Dm, mk_E_riff(riff_E2_l3),
-  riff_Dm, mk_E_riff(riff_E2_l3_l4h),                
-  riff_Dm, mk_E_riff(riff_E2_faster),
+  riff_Dm, mk_E_riff(riff_E2_l3_l4),                
+  riff_Dm, mk_E_riff(riff_E2_end),
 )
 
 let verse2 = cat(
   riff_Dm, mk_E_riff(riff_E2_l3),
-  riff_Dm, mk_E_riff(riff_E2_l3_l4h),  // plus extra legato in E
+  riff_Dm, mk_E_riff(riff_E2_l234),
   riff_Dm, mk_E_riff(riff_E2_l3),
-  riff_Dm, mk_E_riff(riff_E2_faster),
+  riff_Dm, mk_E_riff(riff_E2_end),
 )
 
 let interlude = cat(
   riff_Dm, mk_E_riff(riff_E2_l3_h),
-  riff_Dm, mk_E_riff(riff_E2_faster),  
+  riff_Dm, mk_E_riff(riff_E2_end),  
 )
 
 
@@ -66,7 +70,7 @@ let verse2 =
   */
  
 let bass = 
-  verse1.slow(2)
+  chorus2.slow(2)
   .sound("gm_electric_bass_pick").lpf(900)
 
 let drums = sound(`
