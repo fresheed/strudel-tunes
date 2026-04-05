@@ -11,10 +11,12 @@ let E_l_jump = n("0@3 7  ~@4  ~@2 0@2 6 7@2 7").scale("E:minor").transpose(-24);
 let E = n("0@3 7  ~@4  ~@2 0@2 7@4").scale("E:minor").transpose(-24);
 
 let G1 = n("0@3 7  ~@2 8@3 9@3   ~@4").scale("G:mixolydian").transpose(-24);
-let G1_spaced = n("0@3 7  ~@2 8@2  ~ 9 ~@2  ~@4").scale("G:mixolydian").transpose(-24);
+let G1_spaced = n("0@3 7  [~@2 8@2]@4  [~ 9 ~@2]@4  ~@4").scale("G:mixolydian").transpose(-24);
 let G2 = n("0@3 7@3  8@3 9@3  8@2 7@2").scale("G:mixolydian").transpose(-24);
 let G_extra = n("0@3 7  ~@4   ~@2 0@2  6 7@3").scale("G:mixolydian").transpose(-24);
-let G_stacc = n("0@3 7  ~@2 [7b ~]@2  ~ 4  ~@2 4@4").scale("G:mixolydian").transpose(-24);
+let G_stacc = n("0@3 7  [~ ~ 7b ~]@4  [~ 4 ~ ~]@4  4@4").scale("G:mixolydian").transpose(-24);
+let G_pow = n("0@3 7  [~ ~ 7 ~]@4  ~@4  [~ 4]@4").scale("G:mixolydian").transpose(-24);
+let G2_shuffle = n("0@3 7  [~ 7b]@4  [~ 8@2 ~]@4  [9 7]@4").scale("G:mixolydian").transpose(-24);
 
 let silence = n("~")
 
@@ -43,9 +45,31 @@ let pre_chorus1 = cat(
     G_stacc, G1_spaced
 )
 
+let chorus1 = cat(
+  // "meeeeeee", bar 34
+  // C_extra, C_extra,
+  // A1, A2_desc,
+  // E_l, E_l,
+  G_pow, G2_shuffle,
+)
+
+ 
+let verse2 = null // bar 42: normal; bar 50: almost silence,
+let pre_chorus2 = null // bar 58: screaming; bar 66: almost normal that ends with silence
+
+let chorus2 = null // bar 74
+
+let verse3 = null // bar 82
+let pre_chorus3 = null // bar 98: normal; bar 106: silence
+
+// bar 114: 8 bars of no bass 
+
+let chorus4 = null // bar 122
+let chorus5 = null // bar 130
+
 
 let bass = 
-  pre_chorus1.slow(1)
+  chorus1.slow(1)
   .sound("gm_electric_bass_pick").lpf(900)
 
 let drums = sound(`
