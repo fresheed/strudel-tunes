@@ -54,7 +54,23 @@ let verse_4 = stepcat(
 
 )
 
-let bass = verse_4.slow(4)
+// 7/8, 14 is ghost
+let chorus_Bm = n("[0 ~]@2  [0@2 ~ 14]@2 0 1 2").scale("B:minor").transpose(-24);
+// 9/8, ! the latest 14 is an actual note
+let chorus_Fsm = n("0@2 7   [14 14 6@2]@2  7@1.5 14 ~@0.5 1").scale("F#:minor").transpose(-24);
+// 7/8
+let chorus_Cs = n("~@2 [0@2 ~ 14]@2 [0 7]@2 ~").scale("C#:minor").transpose(-12);
+// 9/8
+let chorus_Em = n("0@2 7   [15 15 8@2]@2  [2 9]@2 [~ 10]@2").scale("E:minor").transpose(-24);
+
+let chorus = stepcat(
+  [7/8, chorus_Bm],
+  [9/8, chorus_Fsm],
+  [7/8, chorus_Cs],
+  [9/8, chorus_Em],
+)
+
+let bass = chorus.slow(4)
   .sound("gm_electric_bass_pick").lpf(900)
 
 let drums = sound(`
