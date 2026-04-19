@@ -10,19 +10,19 @@ let verse_Bm_end = n("0@2 7   ~ [4 ~]@2  -1 0 2").scale("B:minor").transpose(-24
 // 7/8; 14 are actually muted 
 let verse_C_2 = n("[0 ~]@2  [0@3 14]@2  [0 7]@2 ~").scale("C:major").transpose(-12);
 // 9/8
-let verse_Bm_end2 = n("0@2 7  [~ 3]@2  [~ 14 2@2]@2 3 -1").scale("B:minor").transpose(-24);
+let verse_Bm_end2 = n("0@2 7  [~ 3]@2  [~ 14 2@2]@2 [3 -1]@2").scale("B:minor").transpose(-24);
 
 // 9/8
 let verse_Em2 = n("0@1.5 4 7@0.5   ~ 0@1.5 14@0.5  4 4 7").scale("E:minor").transpose(-24);
 // 9/8
-let verse_Bm_end3 = n("0@2 7 ~ 4  [~ 14 2@2]@2 [14 14 3@2]@2").scale("B:minor").transpose(-24);
+let verse_Bm_end3 = n("0@2 7  [~ 4]@2  [~ 14 2@2]@2 [14 14 3@2]@2").scale("B:minor").transpose(-24);
 
 // 7/8
 let verse_Bm_4 = n("[0 ~]@2  [7@3 4]@2 [7 4]@2 ~").scale("B:minor").transpose(-24);
 // 9/8
 let verse_Em4 = n("0@1.5 4 7 0@0.5 0   ~ 0 4 7").scale("E:minor").transpose(-24);
 // 9/8, 9-11 are muted, octave is pop
-let verse_Bm_end4 = n("0@2.5 7 11@0.5 4  ~@0.5 9@0.5 2   [3 -1]@2").scale("B:minor").transpose(-24);
+let verse_Bm_end4 = n("0@2.5 7 11@0.5 4  [~ 14 2@2]  [3 -1]@2").scale("B:minor").transpose(-24);
 
 
 let verse_1 = stepcat(
@@ -63,14 +63,33 @@ let chorus_Cs = n("~@2 [0@2 ~ 14]@2 [0 7]@2 ~").scale("C#:minor").transpose(-12)
 // 9/8
 let chorus_Em = n("0@2 7   [15 15 8@2]@2  [2 9]@2 [~ 10]@2").scale("E:minor").transpose(-24);
 
-let chorus = stepcat(
+// 9/8, ! the latest two 14 are pops
+let chorus_Fsm_twopops = n("0@2 7   [14 14 6@2]@2  7@1.5 14 ~@0.5 14").scale("F#:minor").transpose(-24);
+// 7/8
+let chorus_Cs_nopause = n("0@2 [0@2 ~ 14]@2 [0 7]@2 ~").scale("C#:minor").transpose(-12);
+// 9/8
+let chorus_Em_noghost = n("0@2 7   [1 8]@2  [2 9]@2 [~ 10]@2").scale("E:minor").transpose(-24);
+
+
+let chorus_1 = stepcat(
   [7/8, chorus_Bm],
   [9/8, chorus_Fsm],
   [7/8, chorus_Cs],
-  [9/8, chorus_Em],
+  [9/8, chorus_Em],  
 )
 
-let bass = chorus.slow(4)
+let chorus_2 = stepcat(
+  [7/8, chorus_Bm], // although the dude wrote an 8th pause in tabs somewhere..
+  [9/8, chorus_Fsm_twopops], 
+  [7/8, chorus_Cs_nopause],
+  [9/8, chorus_Em_noghost],
+)
+
+// chorus 3: some diff in Em
+// chorus 4: exactly as chorus 2?
+
+
+let bass = chorus_2.slow(4)
   .sound("gm_electric_bass_pick").lpf(900)
 
 let drums = sound(`
