@@ -10,11 +10,11 @@ let trans2 = null
 // trans2 F low, A#
 // main_riff * 4
 // trans F low, G#
-// verse * 3
+// verse * 3  
 // trans A#, A#, C, G#   * 3
 // trans F low, A#
-// silence * 6
-// main_riff * 1
+// silence  - two main riffs
+//      enter on "Hung down with the freaks and the **ghouls"
 // verse * 2
 // trans F low, A#
 // verse * 3
