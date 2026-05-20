@@ -23,6 +23,10 @@ let chorus = null
 
 // interlude: whole notes, repeat 4 times: F, C#, G#, D# 
 
+// kinda chorus: play with 8ths
+// F, G#, A#, C 
+// continue with chorus: C# D#,  F D#, A#
+
 let bass = 
   verse.slow(2)
   .sound("gm_electric_bass_finger").lpf(900)
