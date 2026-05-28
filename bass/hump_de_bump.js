@@ -12,7 +12,9 @@ let riff_even_up_2 =     in_Dm("[[[0,4]@2 ~] ~] [~ [[0,4]@2 ~]]   [~ [-3 -1]] [~
 let riff_even_down_up =  in_Dm("[[[0,4]@2 ~] ~] [~ [[0,4]@2 ~]]   [~ [6  3]] [~ [0 2]]")
 let riff_even_down_twice = in_Dm("[[[0,4]@2 ~] ~] [~ [[0,4]@2 ~]]   [~ [0 2]] [~ [0 2]]")
 
-let opening = null
+// two bars
+let opening = in_Dm("0@1.5 0@1.5 0@1.5 0@1.5 0@1.5 ~@0.5").slow(2)
+
 let intro = cat(riff_odd, riff_even_down, riff_odd, riff_even_up_2)
 
 let verse_1 = cat(riff_odd, riff_even_down, riff_odd, riff_even_down_up,
@@ -41,8 +43,13 @@ let chorus = cat(
                   fastcat(chorus_B_short, chorus_C_triplets),  
 )
  
+let interlude_one = in_Dm("[[-1 ~]!4]@2 [-1@3 0] ~")
+let interlude_two = in_Dm("[[-1 ~]!3  [0# ~]]@2 [-1@3 0] ~")
+let interlude_end = in_Dm("[[-1 ~]!2  [-1 -2] [-1 ~]]@2  [0 ~]@0.5 ~@1.5")
+let interlude = cat(interlude_one, interlude_end)
+
 let bass = 
-  chorus.slow(1)
+  interlude .slow(1)
   .sound("gm_slap_bass_1").lpf(900)
 
 let drums = sound(`
